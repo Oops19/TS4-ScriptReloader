@@ -9,6 +9,7 @@
 #   - W10: Locate the file to reload in Explorer, Shift-Right-Click on the File > 'Copy as Path'
 #   - Usage: 'r "O:\Electronic Arts\The Sims 4\Mods\_o19_\Scripts\script_reloader.py"' or 'r script_reloader.py' to reload this script.
 
+
 from sims4.commands import Command, CommandType, CheatOutput
 import sims4.reload
 
@@ -17,7 +18,9 @@ import re
 import sys
 import traceback
 
+
 def reload_module(filename, output):
+    # noinspection PyBroadException
     try:
         reloaded_module = sims4.reload.reload_file(filename)
         if reloaded_module is not None:
@@ -28,6 +31,7 @@ def reload_module(filename, output):
         output('Unable to reload: Exception occurred')
         output(traceback.format_exc())
     return False
+
 
 @Command('reload', 'r', command_type=CommandType.Live)
 def script_reloader(module_name, _connection=None):
@@ -46,7 +50,7 @@ def script_reloader(module_name, _connection=None):
         else:
             output('Unable to reload: Module "{}" was not loaded from a .py source'.format(module_name))
     else:
-        for k,v in sys.modules.items():
+        for k, v in sys.modules.items():
             if k.lower() == module_name:
                 if hasattr(v, '__file__') and v.__file__.endswith('.py'):
                     if reload_module(v.__file__, output):
