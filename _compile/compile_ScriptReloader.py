@@ -1,4 +1,4 @@
-# compile.sh version 2.0.18
+# compile.sh version 2.0.19
 
 # This file searches from the parent directory for 'modinfo.py' in it or in any subdirectory.
 # Make sure to have only one 'modinfo.py' in your project directory. The first found 'modinfo.py' is used and loaded.
@@ -20,7 +20,6 @@ from typing import Tuple, Dict, Any
 
 from Utilities.unpyc3_compiler import Unpyc3PythonCompiler
 
-
 additional_directories: Tuple = ()
 include_sources = False
 exclude_folders: Tuple = ()
@@ -38,9 +37,8 @@ try:
         file_appendix = cfg.get('file_appendix', file_appendix)
         auto_beta = cfg.get('auto_beta', auto_beta)
         exclude_dependencies = cfg.get('exclude_dependencies', exclude_dependencies)
-except Exception as e:
-    print(f"Error '{e}' reading compile.ini")
-    exit(1)
+except:
+    pass
 
 beta_appendix = "-beta"  # or "-test-build"
 
@@ -132,11 +130,9 @@ if add_readme:
 
 release_directory = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(os.getcwd()))), 'Release')
 mod_base_directory = os.path.join(release_directory, mod_name)
-mod_base_directory_backup = os.path.join(release_directory, f"{mod_name}.bak")
-if os.path.exists(mod_base_directory_backup):
-    shutil.rmtree(mod_base_directory_backup)
+
 if os.path.exists(mod_base_directory):
-    os.rename(mod_base_directory, mod_base_directory_backup)
+    shutil.rmtree(mod_base_directory)
 
 ts4_directory = os.path.join(mod_base_directory, 'Mods', f"_{author}_")
 
@@ -194,8 +190,9 @@ for exclude_folder in exclude_folders:
 shutil.make_archive(os.path.join(release_directory, f"{zip_file_name}"), 'zip', mod_base_directory)
 print(f'Created {os.path.join(release_directory, f"{zip_file_name}.zip")}')
 
-
 '''
+v2.0.19
+    Remove backup option as it doesn't help with locked directories
 v2.0.18
     Check for __init__.py and its size.
 v2.0.17
