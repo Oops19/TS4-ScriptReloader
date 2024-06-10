@@ -34,4 +34,5 @@ class ModInfo(CommonModInfo):
 '''
 v1.0.0
     1st compiled version
+v0
 '''
