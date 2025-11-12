@@ -24,11 +24,12 @@ In case the .py file is used the script reloader can reload itself.
 To do this open the cheat console with `Shift+Ctrl+C` and enable cheats unless already enabled with `testingcheats true`.
 Then `r script_reloader` (or `reload script_reloader`) will reload it.
 
+---
 
 # 📝 Addendum
 
 ## 🔄 Game compatibility
-This mod has been tested with `The Sims 4` 1.119.109, S4CL 3.15, TS4Lib 0.3.42.
+This mod has been tested with `The Sims 4` 1.119.109, S4CL 3.17, TS4Lib 0.3.42.
 It is expected to remain compatible with future releases of TS4, S4CL, and TS4Lib.
 
 ## 📦 Dependencies
